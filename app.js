@@ -5,8 +5,16 @@ const os = require('os')
 const _ = require('lodash')
 const notes = require('./notes')
 
-const res = notes.add(1, 2005)
-console.log(res);
+console.log(_.isString(true));
+console.log(_.isString('Kevin'));
+console.log(_.isString(2));
+console.log(_.isString(3.5));
+
+const filteredArray = _.uniq([1, 2, 3, 4, 5, 1, 23, 'Kevin', 5, 4, 65, 2, 'Kevin', 'kevin'])
+console.log(filteredArray);
+
+
+
 
 
 // const user = os.userInfo()
