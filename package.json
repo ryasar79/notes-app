@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "eslint": "^5.7.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "yargs": "4.7.1"
   },
   "devDependencies": {},
   "scripts": {
