@@ -1,7 +1,15 @@
-const obj = {
-    name: 'Kevin'
+const fs = require('fs');
+
+var originalNote = {
+    title: 'Some title',
+    body: 'Some body'
 }
 
-const stringObj = JSON.stringify(obj)
-console.log(typeof stringObj)
-console.log(stringObj)
+var originalNoteString = JSON.stringify(originalNote)
+fs.writeFileSync('notes.json', originalNoteString)
+
+var noteString = fs.readFileSync('notes.json')
+var note = JSON.parse(noteString)
+
+console.log(typeof note)
+console.log(note.title)
