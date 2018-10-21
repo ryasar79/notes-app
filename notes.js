@@ -1,4 +1,4 @@
-console.log('Starting notes.js');
+console.log("Starting notes.js");
 
 const fs = require('fs');
 
@@ -22,6 +22,7 @@ const addNote =  (title, body) => {
     if (duplicateNotes.length === 0) {
         notes.push(note);
         fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+        return note;
     }
 };
 
