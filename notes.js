@@ -1,47 +1,60 @@
 console.log("Starting notes.js");
 
-const fs = require('fs');
+const fs = require("fs");
 
-const addNote =  (title, body) => {
-    var notes = [];
-    const note = {
-        title,
-        body
-    };
+const fetchNotes = () => {
+  try {
+    var notesString = fs.readFileSync("notes-data.json");
+    return JSON.parse(notesString);
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
 
-    try {
-        var notesString = fs.readFileSync('notes-data.json');
-        notes = JSON.parse(notesString);
-    } catch (e) {
-    }
+const saveNotes = notes => {
+  fs.writeFileSync("notes-data.json", JSON.stringify(notes));
+};
 
-    var duplicateNotes = notes.filter((note) => {
-        return note.title  === title;
-    });
+const addNote = (title, body) => {
+  var notes = fetchNotes();
+  const note = {
+    title,
+    body
+  };
 
-    if (duplicateNotes.length === 0) {
-        notes.push(note);
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
-        return note;
-    }
+  var duplicateNotes = notes.filter(note => {
+    return note.title === title;
+  });
+
+  if (duplicateNotes.length === 0) {
+    notes.push(note);
+    saveNotes(notes);
+    return note;
+  }
 };
 
 const getAll = () => {
-    console.log('Getting all notes');
+  console.log("Getting all notes");
 };
 
-const read = (title) => {
-    console.log(`Reading note with title ${title}`);
+const read = title => {
+  console.log(`Reading note with title ${title}`);
 };
 
-const remove = (title) => {
-    console.log(`Remove note with title ${title}`);
+const remove = title => {
+  const notes = fetchNotes();
+  const remainingNotes = notes.filter(note => {
+    return note.title !== title;
+  });
+
+  saveNotes(remainingNotes);
+  return notes.length !== remainingNotes.length;
 };
 
 module.exports = {
-    addNote,
-    getAll,
-    read,
-    remove
+  addNote,
+  getAll,
+  read,
+  remove
 };
-
