@@ -58,7 +58,7 @@ const remove = title => {
 };
 
 const logNote = note => {
-  // debugger;
+  //debugger; `node --inspect-brk   app.js read --title=test23 --body="Empty string"`
   console.log("----");
   console.log(`Title: ${note.title}`);
   console.log(`Body : ${note.body}`);
